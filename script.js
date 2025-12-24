@@ -42,6 +42,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 3. Snowfall Effect
+    // Create container for snow if it doesn't exist
+    let snowContainer = document.querySelector('.snow-container');
+    if (!snowContainer) {
+        snowContainer = document.createElement('div');
+        snowContainer.style.position = 'fixed';
+        snowContainer.style.top = '0';
+        snowContainer.style.left = '0';
+        snowContainer.style.width = '100%';
+        snowContainer.style.height = '100%';
+        snowContainer.style.pointerEvents = 'none';
+        snowContainer.style.overflow = 'hidden';
+        snowContainer.style.zIndex = '1';
+        document.body.appendChild(snowContainer);
+    }
+
     function createSnowflake() {
         const snowflake = document.createElement('div');
         snowflake.classList.add('snowflake');
@@ -49,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         snowflake.style.animationDuration = Math.random() * 3 + 2 + 's'; // 2-5s fall time
         snowflake.style.opacity = Math.random();
 
-        document.body.appendChild(snowflake);
+        snowContainer.appendChild(snowflake);
 
         setTimeout(() => {
             snowflake.remove();
